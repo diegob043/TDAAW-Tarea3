@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Button, Grid, CircularProgress, Typography, Card, CardActions, CardContent, CardMedia} from '@mui/material';
 import { LoremIpsum } from 'lorem-ipsum';
 import '../styles/responsive.css'
+import { useNavigate } from 'react-router-dom';
+
+
 
 const getRandomDogImage = async () => {
   try {
@@ -26,6 +29,9 @@ const generateRandomName = () => {
 };
 
 const DogTinder = () => {
+
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const [dogImage, setDogImage] = useState('');
   const [dogName, setDogName] = useState(generateRandomName());
@@ -65,8 +71,11 @@ const DogTinder = () => {
       [newAcceptedDogs.length - 1]: false,
     }));
 
+    navigate('/form-perro'); 
+
     fetchRandomDog();
   };
+  
 
   const rejectDog = () => {
     const newRejectedDogs = [...rejectedDogs, { name: dogName, image: dogImage, descrip: dogdescrip}];
